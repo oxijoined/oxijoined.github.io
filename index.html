@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="static/jquery.terminal.min.css" />
+    <script src="static/jquery-3.3.1.min.js"></script>
+    <script src="static/jquery.terminal.min.js"></script>
+  </head>
+  <body>
+    <div></div>
+    <canvas id="c">
+      
+    </canvas>
+  </body>
+  <script>
+    const artStr = String.raw`
+ ____ ____ ____ ____ ____ ____ 
+||o |||x |||i |||d |||e |||v ||
+||__|||__|||__|||__|||__|||__||
+|/__\|/__\|/__\|/__\|/__\|/__\|
+
+Welcome, type '[[;white;]help]'
+`;
+    $("div").terminal(
+      {
+        help: function () {
+          this.echo(
+            '"[[;white;]about]" - information about me\n"[[;white;]projects]" - information about my projects'
+          );
+        },
+        about: function () {
+          this.echo(
+            "My name is [[;green;]Denis.]\nI like touching [[;orange;]Pythons], [[;blue;]C#].\nMy Github - [[!;;;;https://github.com/oxijoined]github.com/oxijoined]",
+            { typing: true, delay: 50 }
+          );
+        },
+        projects: function () {
+          this.echo(
+            "[[!;;;;https://github.com/oxijoined/VK2Discord]VK2Discord]\n[[!;;;;https://github.com/oxijoined/jutsu-achievements]Jut.su Achievements Hack]\n[[!;;;;https://www.youtube.com/watch?v=dQw4w9WgXcQ]VooDoo Bot]\n[[!;;;;https://github.com/oxijoined?tab=repositories]A ton of different repositories, including private]",
+            { typing: true, delay: 50 }
+          );
+        },
+      },
+      {
+        greetings: artStr,
+        completion: true,
+        focus: true,
+        prompt: "dev@okcuu> ",
+      }
+    );
+  </script>
+
+  <script src="static/matrix.js"></script>
+</html>
