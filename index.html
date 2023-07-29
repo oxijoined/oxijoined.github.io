@@ -1,57 +1,124 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="static/style.css" />
     <link rel="stylesheet" href="static/jquery.terminal.min.css" />
     <script src="static/jquery-3.3.1.min.js"></script>
     <script src="static/jquery.terminal.min.js"></script>
+    <style>
+      .social-icons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+      }
+      .social-icons a {
+        color: #00ff00; /* Change this to match your site's color scheme */
+        margin-right: 10px;
+      }
+      .social-icons a:hover {
+        color: #ffffff;
+      }
+      #terminal {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+      }
+      .terminal-output {
+        overflow: hidden;
+      }
+      .terminal-output > div {
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
-    <div></div>
-    <canvas id="c">
-      
-    </canvas>
+    <div class="container">
+      <div class="social-icons">
+        <a href="https://discord.com/" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://vk.com/" target="_blank"><i class="fab fa-vk"></i></a>
+        <a href="https://telegram.org/" target="_blank"><i class="fab fa-telegram"></i></a>
+      </div>
+      <div id="terminal"></div>
+    </div>
+    <canvas id="c"></canvas>
   </body>
   <script>
     const artStr = String.raw`
- ____ ____ ____ ____ ____ ____ 
-||o |||x |||i |||d |||e |||v ||
-||__|||__|||__|||__|||__|||__||
-|/__\|/__\|/__\|/__\|/__\|/__\|
-
 Welcome, type '[[;white;]help]'
 `;
-    $("div").terminal(
+    $("#terminal").terminal(
       {
         help: function () {
           this.echo(
-            '"[[;white;]about]" - information about me\n"[[;white;]projects]" - information about my projects\n[[;white;]okcu]" - rofl'
+            '"[[;white;]ls]" - reveal the secrets\n"[[;white;]whoami]" - discover your identity\n"[[;white;]pwd]" - find your path\n"[[;white;]date]" - know the time\n"[[;white;]clear]" - cleanse your view\n"[[;white;]echo]" - speak your mind\n"[[;white;]history]" - remember your past\n"[[;white;]uname]" - understand your essence\n"[[;white;]uptime]" - measure your endurance\n"[[;white;]hostname]" - name your domain\n"[[;white;]github]" - explore my creations\n"[[;white;]fortune]" - reveal your destiny\n"[[;white;]joke]" - lighten your mood\n"[[;white;]weather]" - predict the elements\n"[[;white;]quote]" - gain wisdom\n"[[;white;]music]" - soothe your soul'
           );
         },
-        about: function () {
-          this.echo(
-            "My name is [[;green;]Denis.]\nI like touching [[;orange;]Pythons], [[;blue;]C#].\nMy Github - [[!;;;;https://github.com/oxijoined]github.com/oxijoined]",
-            { typing: true, delay: 50 }
-          );
+        ls: function () {
+          this.echo("secret1.txt\nsecret2.txt\nhiddenFolder1\nhiddenFolder2");
         },
-        projects: function () {
-          this.echo(
-            "[[!;;;;https://github.com/oxijoined/VK2Discord]VK2Discord]\n[[!;;;;https://github.com/oxijoined/jutsu-achievements]Jut.su Achievements Hack]\n[[!;;;;https://www.youtube.com/watch?v=dQw4w9WgXcQ]VooDoo Bot]\n[[!;;;;https://github.com/oxijoined/Duties]Students duties telegram bot]\n[[!;;;;https://github.com/oxijoined?tab=repositories]A ton of different repositories, including private]\n\n[[!;;;;https://chat.okcu.ru]Rofl]",
-            { typing: true, delay: 50 }
-          );
+        whoami: function () {
+          this.echo("okcuu");
         },
-        okcu: function () {
-          this.echo(
-            "[[!;;;;https://chat.okcu.ru]rofl]",
-            { typing: true, delay: 50 }
-          );
+        pwd: function () {
+          this.echo("/home/okcuu/secretPath");
+        },
+        date: function () {
+          this.echo(new Date().toString());
+        },
+        clear: function () {
+          this.clear();
+        },
+        echo: function (text) {
+          this.echo(text);
+        },
+        history: function () {
+          this.echo(this.history().data().join('\n'));
+        },
+        uname: function () {
+          this.echo("MysticOS");
+        },
+        uptime: function () {
+          this.echo("up 42 days, 13:37");
+        },
+        hostname: function () {
+          this.echo("dev");
+        },
+        github: function () {
+          const term = this;
+          $.getJSON("https://api.github.com/users/okcuu/repos", function(data) {
+            data.sort((a, b) => b.stargazers_count - a.stargazers_count);
+            data.forEach(repo => {
+              term.echo(`[[!;;;;${repo.html_url}]${repo.name}] - Stars: ${repo.stargazers_count}`);
+            });
+          });
+        },
+        fortune: function () {
+          this.echo("“Для папизи — все изи” - Папич");
+        },
+        joke: function () {
+          this.echo("“Всем советую быть мизантропом. Хотя, если бы все были мезантропами, то кто бы мне донатил” - Папич");
+        },
+        weather: function () {
+          this.echo("“Как только подрубил — скрытый пул.” - Папич");
+        },
+        quote: function () {
+          this.echo("“Вы только вдумайтесь: в стране, в которой меня банят, стоит Статуя Свободы” - Папич");
+        },
+        music: function () {
+          this.echo("“*Уууу тыщ* (звук падающего грифона и минус ушей)” - Папич");
         },
       },
       {
         greetings: artStr,
         completion: true,
         focus: true,
-        prompt: "dev@okcuu> ",
+        prompt: "okcuu@dev> ",
+        onAfterCommand: function() {
+          this.scroll_to_bottom();
+        }
       }
     );
   </script>

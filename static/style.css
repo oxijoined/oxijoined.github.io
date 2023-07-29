@@ -16,3 +16,6 @@ canvas {
     position: absolute;
     top: 0;
 }
+body {
+    overflow: hidden;
+}
