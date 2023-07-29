@@ -17,5 +17,5 @@ canvas {
     top: 0;
 }
 body {
-    overflow: hidden;
+    overflow: hidden !important;
 }
