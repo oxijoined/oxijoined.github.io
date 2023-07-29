@@ -88,7 +88,7 @@ Welcome, type '[[;white;]help]'
         },
         github: function () {
           const term = this;
-          $.getJSON("https://api.github.com/users/okcuu/repos", function(data) {
+          $.getJSON("https://api.github.com/users/oxijoined/repos", function(data) {
             data.sort((a, b) => b.stargazers_count - a.stargazers_count);
             data.forEach(repo => {
               term.echo(`[[!;;;;${repo.html_url}]${repo.name}] - Stars: ${repo.stargazers_count}`);
