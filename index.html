@@ -1,127 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="static/style.css" />
-    <link rel="stylesheet" href="static/jquery.terminal.min.css" />
-    <script src="static/jquery-3.3.1.min.js"></script>
-    <script src="static/jquery.terminal.min.js"></script>
-    <style>
-      .social-icons {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 2;
-      }
-      .social-icons a {
-        color: #00ff00; /* Change this to match your site's color scheme */
-        margin-right: 10px;
-      }
-      .social-icons a:hover {
-        color: #ffffff;
-      }
-      #terminal {
-        position: relative;
-        z-index: 1;
-        height: 100%;
-      }
-      .terminal-output {
-        overflow: hidden;
-      }
-      .terminal-output > div {
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="social-icons">
-        <a href="https://discord.com/" target="_blank"><i class="fab fa-discord"></i></a>
-        <a href="https://vk.com/" target="_blank"><i class="fab fa-vk"></i></a>
-        <a href="https://telegram.org/" target="_blank"><i class="fab fa-telegram"></i></a>
-      </div>
-      <div id="terminal"></div>
-    </div>
-    <canvas id="c"></canvas>
-  </body>
-  <script>
-    const artStr = String.raw`
-Welcome, type '[[;white;]help]'
-`;
-    $("#terminal").terminal(
-      {
-        help: function () {
-          this.echo(
-            '"[[;white;]ls]" - reveal the secrets\n"[[;white;]whoami]" - discover your identity\n"[[;white;]pwd]" - find your path\n"[[;white;]date]" - know the time\n"[[;white;]clear]" - cleanse your view\n"[[;white;]echo]" - speak your mind\n"[[;white;]history]" - remember your past\n"[[;white;]uname]" - understand your essence\n"[[;white;]uptime]" - measure your endurance\n"[[;white;]hostname]" - name your domain\n"[[;white;]github]" - explore my creations\n"[[;white;]fortune]" - reveal your destiny\n"[[;white;]joke]" - lighten your mood\n"[[;white;]weather]" - predict the elements\n"[[;white;]quote]" - gain wisdom\n"[[;white;]music]" - soothe your soul'
-          );
-        },
-        ls: function () {
-          this.echo("secret1.txt\nsecret2.txt\nhiddenFolder1\nhiddenFolder2");
-        },
-        whoami: function () {
-          this.echo("okcuu");
-        },
-        pwd: function () {
-          this.echo("/home/okcuu/secretPath");
-        },
-        date: function () {
-          this.echo(new Date().toString());
-        },
-        clear: function () {
-          this.clear();
-        },
-        echo: function (text) {
-          this.echo(text);
-        },
-        history: function () {
-          this.echo(this.history().data().join('\n'));
-        },
-        uname: function () {
-          this.echo("MysticOS");
-        },
-        uptime: function () {
-          this.echo("up 42 days, 13:37");
-        },
-        hostname: function () {
-          this.echo("dev");
-        },
-        github: function () {
-          const term = this;
-          $.getJSON("https://api.github.com/users/oxijoined/repos", function(data) {
-            data.sort((a, b) => b.stargazers_count - a.stargazers_count);
-            data.forEach(repo => {
-              term.echo(`[[!;;;;${repo.html_url}]${repo.name}] - Stars: ${repo.stargazers_count}`);
-            });
-          });
-        },
-        fortune: function () {
-          this.echo("“Для папизи — все изи” - Папич");
-        },
-        joke: function () {
-          this.echo("“Всем советую быть мизантропом. Хотя, если бы все были мезантропами, то кто бы мне донатил” - Папич");
-        },
-        weather: function () {
-          this.echo("“Как только подрубил — скрытый пул.” - Папич");
-        },
-        quote: function () {
-          this.echo("“Вы только вдумайтесь: в стране, в которой меня банят, стоит Статуя Свободы” - Папич");
-        },
-        music: function () {
-          this.echo("“*Уууу тыщ* (звук падающего грифона и минус ушей)” - Папич");
-        },
-      },
-      {
-        greetings: artStr,
-        completion: true,
-        focus: true,
-        prompt: "okcuu@dev> ",
-        onAfterCommand: function() {
-          this.scroll_to_bottom();
-        }
-      }
-    );
-  </script>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="og:image" content="favicon.png">
+        <title>oxijoined</title>
+        
+        <link rel="icon" href="favicon.png" type="image/png">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <script src="static/matrix.js"></script>
-</html>
+        <script defer src="js/cursor.js"></script>
+        <script defer src="js/lanyard.js"></script>
+        <script defer src="js/preloader.js"></script>
+        <script defer src="js/projects.js"></script>
+        <script defer src="js/scrollActions.js"></script>
+        <script defer src="js/footerTime.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/gh/xaronnn/js-lanyard/lanyard.js"></script>
+        <script src="https://threejs.org/build/three.js"></script>
+    </head>
+    <body>
+        <div class="preload">
+            <div class="preload__container">
+                <div class="preload__container__text">
+                    <h1>Loading...</h1>
+                    <p>Get ready for crazy shit</p>
+                    <canvas id="animation"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <div class="lanyard-wrapper">
+                <img alt="Profile Picture" class="lanyard-profile-picture">
+                <div class="column">
+                    <a href="https://github.com/oxijoined" class="lanyard-username-anchor">
+                        <div class="lanyard-username"></div>
+                    </a>
+                    <div class="lanyard-activity"></div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <!-- <li>
+                        <a href="https://discord.gg/app" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="https://github.com/oxijoined" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>    
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="https://t.me" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="home-wrapper" id="home">
+            <h1 class="title">oxijoined</h1>
+            <h2 class="subtitle">18 year old <span>developer</span></h2>
+            <div class="languages-wrapper">
+                <ul>
+                    <li><i class="fab fa-python"></i></li>
+                    <li><i class="fab fa-js-square"></i></li>
+                    <li><i class="fab fa-docker"></i></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="projects-wrapper" id="projects">
+            <h1 class="projects-title">Projects</h1>
+            <div class="projects"></div>
+        </div>
+
+        <div class="scroll-up">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+
+        <div class="footer-wrapper">
+            <div class="footer">
+                <div class="left-column">
+                    <span class="current-date"></span>
+                    <span class="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html> 
