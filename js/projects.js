@@ -2,10 +2,11 @@ fetch("https://gh-pinned-repos.egoist.dev/?username=oxijoined")
   .then((response) => response.json())
   .then((data) => {
     data.forEach((repo) => {
+        console.log(repo.link)
       document.getElementsByClassName("projects")[0].innerHTML += `
                 <div class="project">
                     <div class="project-title">
-                        <a href="${repo.link}">${repo.repo}</a>
+                        <a href="${repo.link.replace("\n                ","")}">${repo.repo}</a>
                     </div>
                     <div class="project-description">
                         ${repo.description}
